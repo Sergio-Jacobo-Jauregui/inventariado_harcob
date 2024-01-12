@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class DynamodbAppConfig(AppConfig):
+class UsageRecordConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'dynamodb_app'
+    name = 'usage_record'

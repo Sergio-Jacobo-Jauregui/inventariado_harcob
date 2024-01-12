@@ -41,7 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'dynamodb_app'
+    'expense_record',
+    'object',
+    'organization',
+    'purchase_record',
+    'usage_record',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +85,7 @@ WSGI_APPLICATION = 'inventariado_Harcob.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.getenv("SQLITE_DIR"),
     }
 }
 

@@ -1,5 +1,5 @@
 # Acerca del Proyecto
-Este es un sistema de inventariado, mi primer proyecto donde practico Arquitectura de la Nube usando AWS Lambda, AWS API Gateway y AWS EFS, 
+Este es un sistema de inventariado, mi primer proyecto donde practico Arquitectura de la Nube usando AWS Lambda, AWS API Gateway, AWS EFS y AWS EventBridge 
 
 Este proyecto se puede visitar [Aqui](https://n2ldpgukii.execute-api.us-east-1.amazonaws.com/dev/orgs/all/) y este es el [diagrama de DB](https://app.diagrams.net/?src=about#G1OYHE643_CDnLtYGQyZxUp3rAW7f0Tm03).
 

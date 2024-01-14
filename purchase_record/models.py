@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from organization.models import Organization
+from object.models import Work
 
 class PurchaseRecord(models.Model):
   amount = models.IntegerField(blank=True, null=True)
@@ -16,6 +17,7 @@ class PurchaseRecord(models.Model):
 
   # Fks
   organization = models.ForeignKey(Organization, on_delete=models.CASCADE, blank=True, null=True)
+  work = models.ForeignKey(Work, on_delete=models.CASCADE)
 
   def __str__(self):
-    return self.name
+    return 'Creado el: ' + self.created_at

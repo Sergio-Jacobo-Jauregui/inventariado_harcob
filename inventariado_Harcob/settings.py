@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'organization',
     'purchase_record',
     'usage_record',
+    'work',
 ]
 
 MIDDLEWARE = [

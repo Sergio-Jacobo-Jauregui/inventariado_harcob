@@ -11,9 +11,9 @@ class UsageRecord(models.Model):
   updated_at = models.DateTimeField(auto_now=True)
 
   # Fks
-  organization = models.ForeignKey(Organization, on_delete=models.CASCADE, blank=True, null=True)
-  tool = models.ForeignKey(Tool, on_delete=models.CASCADE, blank=True, null=True)
-  work = models.ForeignKey(Work, on_delete=models.CASCADE)
+  organization = models.ForeignKey(Organization, on_delete=models.CASCADE, blank=False, null=True)
+  tool = models.ForeignKey(Tool, on_delete=models.CASCADE, blank=False, null=True)
+  work = models.ForeignKey(Work, on_delete=models.CASCADE, blank=False, null=True)
 
   def __str__(self):
     return 'Usado por: ' + self.person_name

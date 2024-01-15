@@ -8,8 +8,8 @@ class Tool(models.Model):
   updated_at = models.DateTimeField(auto_now=True)
 
   # FKs
-  organization = models.ForeignKey(Organization, on_delete=models.CASCADE, blank=True, null=True)
-  work = models.ForeignKey(Work, on_delete=models.CASCADE)
+  organization = models.ForeignKey(Organization, on_delete=models.CASCADE, blank=False, null=True)
+  work = models.ForeignKey(Work, on_delete=models.CASCADE, blank=False, null=True)
 
   def __str__(self):
     return self.name
@@ -22,8 +22,8 @@ class Material(models.Model):
   updated_at = models.DateTimeField(auto_now=True)
 
   # FKs
-  organization = models.ForeignKey(Organization, on_delete=models.CASCADE, blank=True, null=True)
-  work = models.ForeignKey(Work, on_delete=models.CASCADE)
+  organization = models.ForeignKey(Organization, on_delete=models.CASCADE, blank=False, null=True)
+  work = models.ForeignKey(Work, on_delete=models.CASCADE, blank=False, null=True)
 
   def __str__(self):
     return self.name

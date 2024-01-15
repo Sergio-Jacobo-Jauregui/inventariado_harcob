@@ -12,7 +12,7 @@ class ExpenseRecord(models.Model):
   updated_at = models.DateTimeField(auto_now=True)
 
   # Fks
-  organization = models.ForeignKey(Organization, on_delete=models.CASCADE, blank=True, null=True)
-  material = models.ForeignKey(Material, on_delete=models.CASCADE, blank=True, null=True)
-  purchase_record = models.ForeignKey(PurchaseRecord, on_delete=models.CASCADE, blank=True, null=True)
-  work = models.ForeignKey(Work, on_delete=models.CASCADE)
+  organization = models.ForeignKey(Organization, on_delete=models.CASCADE, blank=False, null=True)
+  material = models.ForeignKey(Material, on_delete=models.CASCADE, blank=False, null=True)
+  purchase_record = models.ForeignKey(PurchaseRecord, on_delete=models.CASCADE, blank=False, null=True)
+  work = models.ForeignKey(Work, on_delete=models.CASCADE, blank=False, null=True)

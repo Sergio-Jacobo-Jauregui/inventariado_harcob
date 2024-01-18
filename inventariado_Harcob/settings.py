@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'usage_record',
     'work',
     'whitenoise.runserver_nostatic',
+    'sub_user'
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Log In
 LOGIN_URL = '/auth/login/'
+
+# Custom User
+AUTH_USER_MODEL = 'sub_user.SubUser'

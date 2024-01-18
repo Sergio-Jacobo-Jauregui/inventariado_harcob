@@ -3,4 +3,4 @@ __pycache__/
 .env
 zappa_settings.json
 inventariado_Harcob/context
-./db.sqlite3
+.db.sqlite3

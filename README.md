@@ -7,3 +7,5 @@ Este proyecto se puede visitar [Aqui](https://n2ldpgukii.execute-api.us-east-1.a
  - Este sistema guarda la informacion de herramientas y materiales por cada organizacion que la usa
  - Registra cada compra y cada uso de cada material, ademas hay un registro de cada uso de herramienta con los datos de quien lo tomo y cuando lo regreso.
  - Cada usuario admin tiene la capacidad de crear mas usuarios con permisos de lectura o escritura personalizados dependiendo de sus necesidades.
+---
+**Esta aplicacion sigue en desaroollo**

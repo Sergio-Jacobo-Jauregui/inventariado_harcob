@@ -41,14 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'expense_record',
-    'object',
+    'stored_objects',
     'organization',
     'purchase_record',
-    'usage_record',
     'work',
     'whitenoise.runserver_nostatic',
-    'sub_user'
+    'sub_user',
+    'accion_record',
 ]
 
 MIDDLEWARE = [

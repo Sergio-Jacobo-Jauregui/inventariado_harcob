@@ -10,17 +10,21 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('organization', '0001_initial'),
+        ('work', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='PurchaseRecord',
+            name='StoredObjects',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.IntegerField(blank=True, null=True)),
+                ('name', models.CharField(max_length=50, null=True)),
+                ('type', models.CharField(max_length=50, null=True)),
+                ('amount', models.IntegerField()),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('organization', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='organization.organization')),
+                ('work', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='work.work')),
             ],
         ),
     ]

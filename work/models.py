@@ -3,7 +3,7 @@ from django.db import models
 class Work(models.Model):
   name = models.CharField(max_length=50)
   description = models.TextField()
-  active = models.BooleanField()
+  active = models.BooleanField(default=True)
 
   # Timestamps
   created_at = models.DateTimeField(auto_now_add=True)

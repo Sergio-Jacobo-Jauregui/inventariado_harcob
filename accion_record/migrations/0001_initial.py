@@ -14,10 +14,13 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='PurchaseRecord',
+            name='AccionRecord',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.IntegerField(blank=True, null=True)),
+                ('person_name', models.CharField(max_length=50, null=True)),
+                ('type', models.CharField(max_length=50, null=True)),
+                ('amount', models.IntegerField(null=True)),
+                ('amount_type', models.CharField(max_length=50, null=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('organization', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='organization.organization')),

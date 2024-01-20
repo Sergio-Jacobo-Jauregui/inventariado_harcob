@@ -2,9 +2,10 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.conf import settings
 from .managers import CustomUserManager
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from django.core.exceptions import ValidationError
+from .utils import AddPermissions
 
 
 class SubUser(AbstractUser):
@@ -32,22 +33,14 @@ class SubUser(AbstractUser):
     def __str__(self):
         return self.username
     
-    def give_read_permissions(self):
-        pass
-    
-    def give_read_write_permissions(self):
-        pass
-    
-    def give_all_permissions(self):
-        pass
-    
 @receiver(pre_save, sender=SubUser)
+def verify_type(sender, instance, **kwargs):
+  keys = list(sender.STORED_OBJECTS_TYPE.keys())
+
+  if not instance.type in keys:
+     raise ValidationError("El campo Type debe tener un valor valido")
+
+@receiver(post_save, sender=SubUser)
 def give_permissions(sender, instance, **kwargs):
-    if instance.type == 'only_read':
-         instance.give_read_permissions()
-    elif instance.type == 'read_write':
-         instance.give_read_write_permissions()
-    elif instance.type == 'read_write_delete':
-         instance.give_all_permissions()
-    else:
-        raise ValidationError("El campo Type debe tener un valor valido")
+    permission_assigner = AddPermissions(instance=instance)
+    permission_assigner.asign_permisses()

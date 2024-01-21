@@ -6,7 +6,7 @@ from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from django.core.exceptions import ValidationError
 from .utils import AddPermissions
-
+from organization.models import Organization
 
 class SubUser(AbstractUser):
     STORED_OBJECTS_TYPE = {
@@ -17,10 +17,12 @@ class SubUser(AbstractUser):
 
     type = models.CharField(max_length=50, choices=STORED_OBJECTS_TYPE, null=False, blank=True)
 
+    # FKs
     if settings.DEBUG:
         parent_user_id = models.ForeignKey('self', on_delete=models.DO_NOTHING, null=True, blank=True)
     else:
         parent_user_id = models.ForeignKey('self', on_delete=models.RESTRICT, null=True, blank=True)
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, blank=False, null=True)
 
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
@@ -35,12 +37,14 @@ class SubUser(AbstractUser):
     
 @receiver(pre_save, sender=SubUser)
 def verify_type(sender, instance, **kwargs):
-  keys = list(sender.STORED_OBJECTS_TYPE.keys())
+    if instance._state.adding:
+        keys = list(sender.STORED_OBJECTS_TYPE.keys())
 
-  if not instance.type in keys:
-     raise ValidationError("El campo Type debe tener un valor valido")
+        if not instance.type in keys:
+            raise ValidationError("El campo Type debe tener un valor valido")
 
 @receiver(post_save, sender=SubUser)
 def give_permissions(sender, instance, **kwargs):
-    permission_assigner = AddPermissions(instance=instance)
-    permission_assigner.asign_permisses()
+    if instance._state.adding:
+        permission_assigner = AddPermissions(instance=instance)
+        permission_assigner.asign_permisses()

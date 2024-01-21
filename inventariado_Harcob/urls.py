@@ -8,10 +8,11 @@ def ok(request):
     return JsonResponse(data)
 
 urlpatterns = [
+    path('ok/', ok),
     path('admin/', admin.site.urls),
     path('auth/', include('django.contrib.auth.urls')),
-    path('ok/', ok),
-    path('orgs/', include('organization.urls')),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
+    path('work/', include('work.urls')),
+    path('stored_objects/', include('stored_objects.urls')),
 ]

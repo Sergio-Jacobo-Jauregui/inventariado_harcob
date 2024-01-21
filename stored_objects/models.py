@@ -24,7 +24,7 @@ class StoredObjects(models.Model):
   work = models.ForeignKey(Work, on_delete=models.CASCADE, blank=False, null=True)
 
   def __str__(self):
-    return  self.name
+    return  self.name if self.name else super().__str__()
   
 @receiver(pre_save, sender=StoredObjects)
 def verify_type(sender, instance, **kwargs):

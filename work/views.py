@@ -1,4 +1,3 @@
-
 from django.http import JsonResponse
 from .models import Work
 from django.core.serializers import serialize
@@ -11,14 +10,14 @@ import json
 @login_required
 def create_work(request):
   data = json.loads(request.body)
-  works = Work.objects.create(
-    name=data.name,
-    description=data.description,
-    active=data.active,
+  work = Work.objects.create(
+    name=data['name'],
+    description=data['description'],
+    active=data['active'],
     organization_id=request.user.organization_id
   )
 
-  serialized_work = serialize('json', works)
+  serialized_work = serialize('json', [work])
   return JsonResponse(serialized_work, safe=False)
 
 # Read

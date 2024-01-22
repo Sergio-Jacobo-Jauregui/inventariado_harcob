@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.http import HttpResponse
 from .models import StoredObjects
 from django.core.serializers import serialize
 from django.contrib.auth.decorators import login_required
@@ -7,20 +8,19 @@ from .serializer import StoredObjectsSerializer
 from .utils import CreateStoredObjects
 import json
 
-# ToDo
+# ToDo n+1
 
 # Create
 @permission_required('stored_objects.add_storedobjects', raise_exception=False)
 @login_required
 def create_stored_object(request):
   data = json.loads(request.body)
-  stored_objects = [
-    # Todo
-  ]
-  # CreateStoredObjects.create_instances(stored_objects)
-  # serialized_work = serialize('json', works)
-  # return JsonResponse(serialized_work, safe=False)
-  pass
+  objects = CreateStoredObjects.create_instances(data)
+  if objects:
+    return HttpResponse(status=200)
+  else:
+    return JsonResponse({"a":"maaal"}, safe=False)
+  
 
 # Read
 @permission_required('stored_objects.view_storedobjects', raise_exception=False)

@@ -8,7 +8,7 @@ from django.core.exceptions import ValidationError
 
 class AccionRecord(models.Model):
   ACCION_TYPE = {
-    'entry': 'Entry',
+    'delivery': 'Delivery',
     'return': 'Return'
   }
 

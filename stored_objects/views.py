@@ -11,8 +11,8 @@ import json
 @permission_required('stored_objects.add_storedobjects', raise_exception=False)
 def create_stored_object(request):
   data = json.loads(request.body)
-  objects = CreateStoredObjects.create_instances(data)
-  if objects:
+  status = CreateStoredObjects.create_instances(data)
+  if status:
     return HttpResponse(status=200)
   else:
     return HttpResponse("Se ha enviado algun mal dato", status=400)

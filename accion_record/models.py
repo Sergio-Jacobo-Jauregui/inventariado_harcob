@@ -1,6 +1,7 @@
 from django.db import models
 from organization.models import Organization
 from stored_objects.models import StoredObjects
+from person.models import Person
 from work.models import Work
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
@@ -12,8 +13,6 @@ class AccionRecord(models.Model):
     'return': 'Return'
   }
 
-  person_name = models.CharField(max_length=50, blank=False, null=True)
-  dni = models.CharField(max_length=8, blank=False, null=True)
   type = models.CharField(max_length=50, blank=False, null=True, choices=ACCION_TYPE)
   amount = models.IntegerField(blank=False, null=True)
   amount_type = models.CharField(max_length=50, blank=False, null=True)
@@ -26,6 +25,7 @@ class AccionRecord(models.Model):
   organization = models.ForeignKey(Organization, on_delete=models.CASCADE, blank=False, null=True)
   work = models.ForeignKey(Work, on_delete=models.CASCADE, blank=False, null=True)
   stored_object = models.ForeignKey(StoredObjects, on_delete=models.CASCADE, blank=False, null=True)
+  person = models.ForeignKey(Person, on_delete=models.CASCADE, blank=False, null=True)
 
 @receiver(pre_save, sender=AccionRecord)
 def verify_type(sender, instance, **kwargs):

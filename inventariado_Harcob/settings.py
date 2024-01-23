@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'sub_user',
     'accion_record',
+    'person',
 ]
 
 MIDDLEWARE = [

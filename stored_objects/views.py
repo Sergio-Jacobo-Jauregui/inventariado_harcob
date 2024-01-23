@@ -4,19 +4,27 @@ from .models import StoredObjects
 from django.core.serializers import serialize
 from django.contrib.auth.decorators import permission_required
 from .serializer import StoredObjectsSerializer
-from .utils import CreateStoredObjects
+from .utils import StoredObjectsCreator
 import json
+from django.db import transaction
 
 # Create
+@transaction.atomic
 @permission_required('stored_objects.add_storedobjects', raise_exception=False)
 def create_stored_object(request):
   data = json.loads(request.body)
-  status = CreateStoredObjects.create_instances(data)
-  if status:
-    return HttpResponse(status=200)
-  else:
-    return HttpResponse("Se ha enviado algun mal dato", status=400)
-  
+  try:
+    instances_creator = StoredObjectsCreator(
+      new_instances=data['new_instances'],
+      old_instances=data['old_instances_ids'],
+      organization_id=request.user.organization_id,
+      work_id=data['current_work']
+    )
+    message = instances_creator.add_stored_objects()
+    return HttpResponse(message, status=200)
+  except ValueError as e:
+    return HttpResponse(f"Error: {e}", status=400)
+
 # Read
 @permission_required('stored_objects.view_storedobjects', raise_exception=False)
 def get_for_org(request):

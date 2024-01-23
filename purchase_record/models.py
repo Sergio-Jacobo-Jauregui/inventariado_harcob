@@ -16,4 +16,4 @@ class PurchaseRecord(models.Model):
   stored_object = models.ForeignKey(StoredObjects, on_delete=models.CASCADE, blank=False, null=True)
 
   def __str__(self):
-    return 'Creado el: ' + self.created_at
+    return 'Creado el: ' + str(self.created_at)

@@ -16,4 +16,5 @@ urlpatterns = [
     path('work/', include('work.urls')),
     path('stored_objects/', include('stored_objects.urls')),
     path('accion_record/', include('accion_record.urls')),
+    path('person/', include('person.urls')),
 ]

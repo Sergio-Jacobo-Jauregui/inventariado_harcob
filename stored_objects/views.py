@@ -10,7 +10,7 @@ from django.db import transaction
 
 # Create
 @transaction.atomic
-@permission_required('stored_objects.add_storedobjects', raise_exception=False)
+@permission_required('sub_user.add_permission', raise_exception=False)
 def create_stored_object(request):
   data = json.loads(request.body)
   try:
@@ -26,7 +26,7 @@ def create_stored_object(request):
     return HttpResponse(f"Error: {e}", status=400)
 
 # Read
-@permission_required('stored_objects.view_storedobjects', raise_exception=False)
+@permission_required('sub_user.view_permission', raise_exception=False)
 def get_for_org(request):
   data = json.loads(request.body)
   stored_objects = StoredObjects.objects.filter(work_id=data['work_id'])

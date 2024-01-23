@@ -44,7 +44,7 @@ def verify_type(sender, instance, **kwargs):
             raise ValidationError("El campo Type debe tener un valor valido")
 
 @receiver(post_save, sender=SubUser)
-def give_permissions(sender, instance, **kwargs):
-    if instance._state.adding:
-        permission_assigner = AddPermissions(instance=instance)
+def give_permissions(sender, instance, created, **kwargs):
+    if created:
+        permission_assigner = AddPermissions(instance=instance, model=SubUser)
         permission_assigner.asign_permisses()

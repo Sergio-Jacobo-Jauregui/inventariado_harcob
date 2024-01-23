@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import permission_required
 import json
 
 # Create
-@permission_required('work.add_work', raise_exception=False)
+@permission_required('sub_user.add_permission', raise_exception=False)
 def create_work(request):
   data = json.loads(request.body)
   work = Work.objects.create(
@@ -19,7 +19,7 @@ def create_work(request):
   return JsonResponse(serialized_work, safe=False)
 
 # Read
-@permission_required('work.view_work', raise_exception=False)
+@permission_required('sub_user.view_permission', raise_exception=False)
 def get_for_org(request):
   works = Work.objects.filter(organization_id=request.user.organization_id)
   serialized_works = serialize('json', works)

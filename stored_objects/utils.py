@@ -1,6 +1,5 @@
 from .models import StoredObjects
 from purchase_record.utils import PurchaseRecordCreator
-from django.http import HttpResponse
 from django.db import transaction
 
 @transaction.atomic
@@ -71,3 +70,10 @@ class StoredObjectsCreator:
       self.work_id
     )
 
+@transaction.atomic
+class StoredObjectsUpdater:
+  def __init__(self, objects):
+    self.objects = objects
+
+  def update_instances(self):
+    pass

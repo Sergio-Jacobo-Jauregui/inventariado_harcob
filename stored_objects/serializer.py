@@ -8,7 +8,7 @@ class StoredObjectsSerializer:
       'id': object.id,
       'name': object.name,
       'type': object.type,
-      'amount': object.amount,
+      'quantity': object.quantity,
       'organization_id': object.organization_id,
       'work_id': object.work_id,
     })

@@ -21,7 +21,7 @@ class StoredObjectsCreator:
       StoredObjects(
         name=instance['name'],
         type=instance['type'],
-        amount=instance['amount'],
+        quantity=instance['quantity'],
         organization_id=self.organization_id,
         work_id=self.work_id
       ) for instance in self.new_instances
@@ -35,7 +35,7 @@ class StoredObjectsCreator:
     return [
       { 
         'id': new_object.id,
-        'amount': new_object.amount
+        'quantity': new_object.quantity
       } for new_object in created_objects
     ]
 
@@ -53,13 +53,13 @@ class StoredObjectsCreator:
           update_stored_objects.append(
             StoredObjects(
             id=stored_object.id,
-            amount=stored_object.amount + original_object['amount']
+            quantity=stored_object.quantity + original_object['quantity']
             )
           )
           break
 
     try:
-      StoredObjects.objects.bulk_update(update_stored_objects, ['amount'])
+      StoredObjects.objects.bulk_update(update_stored_objects, ['quantity'])
     except:
       raise ValueError("Hay un mal dato en los viejos objectos")
 

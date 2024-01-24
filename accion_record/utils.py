@@ -17,8 +17,8 @@ class AccionRecordCreator:
     objects = [
         AccionRecord(
           type=instance['type'],
-          amount=instance['amount'],
-          amount_type=instance['amount_type'],
+          quantity=instance['quantity'],
+          quantity_type=instance['quantity_type'],
 
           organization_id=instance['organization_id'],
           work_id=instance['work_id'],

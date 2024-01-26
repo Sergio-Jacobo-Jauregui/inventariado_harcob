@@ -2,13 +2,13 @@ from .models import AccionRecord
 from django.db import transaction
 from stored_objects.utils import StoredObjectsUpdater
 
-@transaction.atomic
 class AccionRecordCreator:
   def __init__(self, current_work, objects, organization_id):
     self.current_work = current_work
     self.objects = objects
     self.organization_id = organization_id
 
+  @transaction.atomic
   def create_instances(self):
     self.create_accion_records()
     self.increase_or_decrease_objects()

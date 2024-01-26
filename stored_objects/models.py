@@ -13,8 +13,8 @@ class StoredObjects(models.Model):
 
   name = models.CharField(max_length=50, blank=False, null=True)
   type = models.CharField(max_length=50, blank=False, null=True, choices=STORED_OBJECTS_TYPE)
-  stored_quantity = models.IntegerField(blank=False, null=True)
-  quantity_in_use = models.IntegerField(blank=False, null=True)
+  stored_quantity = models.PositiveIntegerField(blank=False, null=True)
+  quantity_in_use = models.PositiveIntegerField(blank=False, null=True)
 
   # Timestamps
   created_at = models.DateTimeField(auto_now_add=True)

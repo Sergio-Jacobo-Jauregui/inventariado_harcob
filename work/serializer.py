@@ -1,21 +1,20 @@
-class WorkSerializer():
-    def __init__(self, objects):
-      self.objects = objects
-
-    def serialize_unit(self):
+class WorkSerializer:
+    def serialize_unit(instance):
       return {
-               'name': self.objects.name,
-               'description': self.objects.description,
-               'active': self.objects.active,
+               'id': instance.id,
+               'name': instance.name,
+               'description': instance.description,
+               'active': instance.active,
              }
 
-    def serialize_collection(self):
+    def serialize_collection(objects):
       return {
               'data': [
                  {
+                   'id': instance.id,
                    'name': instance.name,
                    'description': instance.description,
                    'active': instance.active,
-                 } for instance in self.objects
+                 } for instance in objects
                ]
              }

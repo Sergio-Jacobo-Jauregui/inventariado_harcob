@@ -5,7 +5,7 @@ class PurchaseRecordCreator:
     objects = [
         PurchaseRecord(
           stored_object_id=instance['id'],
-          quantity=instance['quantity'],
+          added_quantity=instance['added_quantity'],
           organization_id=organization_id,
           work_id=work_id
         ) for instance in data

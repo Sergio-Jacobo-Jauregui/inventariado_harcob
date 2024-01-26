@@ -6,10 +6,8 @@ from django.contrib.auth.decorators import permission_required
 from .serializer import StoredObjectsSerializer
 from .utils import StoredObjectsCreator
 import json
-from django.db import transaction
 
 # Create
-@transaction.atomic
 @permission_required('sub_user.add_permission', raise_exception=False)
 def create_stored_object(request):
   data = json.loads(request.body)
@@ -27,8 +25,8 @@ def create_stored_object(request):
 
 # Read
 @permission_required('sub_user.view_permission', raise_exception=False)
-def get_for_org(request):
+def get_for_work(request):
   data = json.loads(request.body)
   stored_objects = StoredObjects.objects.filter(work_id=data['work_id'])
-  objects_serialized = StoredObjectsSerializer.serialize(stored_objects)
-  return JsonResponse(objects_serialized, safe=False)
+  objects_serialized = StoredObjectsSerializer.serialize_collection(stored_objects)
+  return JsonResponse(objects_serialized, safe=True)

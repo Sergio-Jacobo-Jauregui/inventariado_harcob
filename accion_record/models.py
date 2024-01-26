@@ -14,7 +14,7 @@ class AccionRecord(models.Model):
   }
 
   type = models.CharField(max_length=50, blank=False, null=True, choices=ACCION_TYPE)
-  quantity = models.IntegerField(blank=False, null=True)
+  quantity = models.PositiveIntegerField(blank=False, null=True)
   quantity_type = models.CharField(max_length=50, blank=False, null=True)
 
   # Timestamps

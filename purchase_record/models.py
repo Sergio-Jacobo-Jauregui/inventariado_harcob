@@ -4,7 +4,7 @@ from stored_objects.models import StoredObjects
 from work.models import Work
 
 class PurchaseRecord(models.Model):
-  quantity = models.IntegerField(blank=True, null=True)
+  added_quantity = models.PositiveIntegerField(blank=False, null=True)
 
   # Timestamps
   created_at = models.DateTimeField(auto_now_add=True)

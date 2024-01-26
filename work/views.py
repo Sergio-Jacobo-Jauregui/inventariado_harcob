@@ -16,12 +16,12 @@ def create_work(request):
     organization_id=request.user.organization_id
   )
 
-  serialized_work = WorkSerializer(objects=work).serialize_unit()
+  serialized_work = WorkSerializer.serialize_unit(work)
   return JsonResponse(serialized_work, safe=True)
 
 # Read
 @permission_required('sub_user.view_permission', raise_exception=False)
 def get_for_org(request):
   works = Work.objects.filter(organization_id=request.user.organization_id)
-  serialized_works = WorkSerializer(objects=works).serialize_collection()
+  serialized_works = WorkSerializer.serialize_collection(works)
   return JsonResponse(serialized_works, safe=True)

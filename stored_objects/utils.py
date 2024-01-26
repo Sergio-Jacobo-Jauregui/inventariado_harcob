@@ -62,7 +62,7 @@ class StoredObjectsCreator:
 
     if len(stored_objects) != len(id_list):
       raise ValueError("Se paso un id que no existe para actualizar")
-    
+
     if len(id_list) != len(set(id_list)):
       raise ValueError("Se paso un objecto id duplicado")
 
@@ -95,10 +95,36 @@ class StoredObjectsCreator:
       work_id=self.work_id
     )
 
+# todo: add validation not negative number and granularize
 class StoredObjectsUpdater:
-  def __init__(self, objects):
-    self.objects = objects
+  def update_instances(objects):
+    ids = [ instance['stored_object_id'] for instance in objects ]
+    stored_objects = StoredObjects.objects.filter(id__in=ids)
 
-  def update_instances(self):
-    pass
+    update_stored_objects = []
+    for stored_object in list(stored_objects):
+      for object in objects:
+        if stored_object.id == object['stored_object_id']:
+          if object['type'] ==  'delivery':
+            update_instance = StoredObjects(
+              id=stored_object.id,
+              stored_quantity=stored_object.stored_quantity - object['quantity'],
+              quantity_in_use=stored_object.quantity_in_use + object['quantity']
+            )
+          else:
+            update_instance = StoredObjects(
+              id=stored_object.id,
+              stored_quantity=stored_object.stored_quantity + object['quantity'],
+              quantity_in_use=stored_object.quantity_in_use - object['quantity']
+            )
 
+          update_stored_objects.append(update_instance)  
+          break
+    try:
+      StoredObjects.objects.bulk_update(update_stored_objects, ['stored_quantity', 'quantity_in_use'])
+    except:
+      raise ValueError("Hay algun problema actualizando los stored objects")
+    
+    return 'Instancias creadas correctamente'
+    
+    

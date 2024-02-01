@@ -19,6 +19,7 @@ cache:
     - .cache/pip
 
 before_script:
+  - echo 1111111111111111111
   - python --version ; pip --version  # For debugging
   - pip install virtualenv
   - virtualenv venv
@@ -26,29 +27,19 @@ before_script:
 
 test:
   script:
+    - echo 3333333333333333
     - pip install ruff tox  # you can also use tox
     - pip install --editable ".[test]"
     - tox -e py,ruff
 
 run:
   script:
+    - echo 22222222222222222222
     - pip install .
     # run the command here
   artifacts:
     paths:
       - build/*
-
-pages:
-  script:
-    - pip install sphinx sphinx-rtd-theme
-    - cd doc
-    - make html
-    - mv build/html/ ../public/
-  artifacts:
-    paths:
-      - public
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 deploy:
   stage: deploy

@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+import sys
 
 load_dotenv()
 
@@ -160,3 +161,6 @@ LOGGING = {
         },
     },
 }
+
+if 'test' in sys.argv:
+    LOGGING['handlers']['console']['level'] = 'ERROR'

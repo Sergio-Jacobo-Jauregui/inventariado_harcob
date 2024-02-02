@@ -15,6 +15,7 @@ assume role:
       --duration-seconds 3600
       --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
       --output text))
+    - echo $AWS_ACCESS_KEY_ID
     - aws sts get-caller-identity
 
 build-job:

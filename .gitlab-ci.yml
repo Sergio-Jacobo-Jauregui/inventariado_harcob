@@ -1,6 +1,6 @@
 stages:
   - test
-  - connect-aws
+  - deploy
 
 test:
   stage: test
@@ -10,12 +10,11 @@ test:
     SQLITE_DIR: "$BASE_DIR/docker/db_empty.sqlite3"
     DEBUG: 'true'
   script:
-    - ls
     - pip install -r requirements.txt
     - python3 manage.py test
 
-assume role:
-  stage: connect-aws
+deploy:
+  stage: deploy
   image: 
     name: amazon/aws-cli:latest
     entrypoint: [""]
@@ -23,6 +22,7 @@ assume role:
     GITLAB_OIDC_TOKEN:
       aud: https://gitlab.com
   script:
+    - echo Login to AWS
     - >
       export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s"
       $(aws sts assume-role-with-web-identity
@@ -33,3 +33,8 @@ assume role:
       --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
       --output text))
     - aws sts get-caller-identity
+    - echo Build docker image
+    - docker build -t $CI_PROJECT_NAME:$CI_COMMIT_SHA -f docker/Dockerfile ./ 
+    - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 474414115297.dkr.ecr.us-east-1.amazonaws.com
+    - echo Uploading
+    - docker push 474414115297.dkr.ecr.us-east-1.amazonaws.com/$CI_PROJECT_NAME:$CI_COMMIT_SHA

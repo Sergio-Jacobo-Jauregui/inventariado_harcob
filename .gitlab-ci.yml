@@ -8,7 +8,7 @@ test:
   variables:
     ALLOWED_HOSTS: "*"
     SQLITE_DIR: "$BASE_DIR/docker/db_empty.sqlite3"
-    DEBUG: True
+    DEBUG: 'true'
   script:
     - ls
     - pip install -r requirements.txt

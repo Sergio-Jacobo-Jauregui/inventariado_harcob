@@ -87,11 +87,10 @@ WSGI_APPLICATION = 'inventariado_Harcob.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-db_route = os.environ.get('SQLITE_DIR')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': db_route,
+        'NAME': os.environ.get('SQLITE_DIR'),
     }
 }
 

@@ -9,6 +9,8 @@ click==8.1.7
 Django==5.0.1
 django-storages==1.14.2
 durationpy==0.6
+factory-boy==3.3.0
+Faker==22.6.0
 hjson==3.1.0
 idna==3.6
 jmespath==1.0.1
@@ -33,4 +35,5 @@ troposphere==4.5.3
 typing_extensions==4.9.0
 urllib3==1.26.18
 Werkzeug==3.0.1
+whitenoise==6.6.0
 zappa==0.58.0

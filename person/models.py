@@ -6,7 +6,7 @@ class Person(models.Model):
   last_names = models.CharField(max_length=50)
   dni = models.CharField(max_length=8)
 
-  # Fk s
+  # Fks
   organization = models.ForeignKey(Organization, on_delete=models.CASCADE, blank=False, null=True)
 
   def __str__(self):

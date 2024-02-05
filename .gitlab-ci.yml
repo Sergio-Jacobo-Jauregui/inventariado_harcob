@@ -42,4 +42,5 @@ deploy:
     - docker build -t $CI_PROJECT_NAME:$CI_COMMIT_SHA -f docker/Dockerfile ./ 
     - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 474414115297.dkr.ecr.us-east-1.amazonaws.com
     - echo Uploading
+    - docker tag $CI_PROJECT_NAME:$CI_COMMIT_SHA 474414115297.dkr.ecr.us-east-1.amazonaws.com/inventariado_harcop:latest 
     - docker push 474414115297.dkr.ecr.us-east-1.amazonaws.com/$CI_PROJECT_NAME:$CI_COMMIT_SHA

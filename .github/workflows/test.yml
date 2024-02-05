@@ -3,6 +3,10 @@ run-name: ${{ github.actor }} is testing
 on:
   push:
     branches: [proof_github_actions]
+env:
+  ALLOWED_HOSTS: "*"
+  SQLITE_DIR: "$BASE_DIR/docker/db_empty.sqlite3"
+  DEBUG: 'true'
 jobs:
   test:
     runs-on: ubuntu-latest

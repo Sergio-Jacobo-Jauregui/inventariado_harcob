@@ -21,8 +21,8 @@ jobs:
     - name: Create Docker image
       run: |
         docker info
-        docker build -t $GITHUB_REPOSITORY:$$GITHUB_SHA -f docker/Dockerfile ./
-        docker tag $GITHUB_REPOSITORY:$$GITHUB_SHA 474414115297.dkr.ecr.us-east-1.amazonaws.com/inventariado_harcop:latest 
+        docker build -t $GITHUB_REPOSITORY:$GITHUB_SHA -f docker/Dockerfile ./
+        docker tag $GITHUB_REPOSITORY:$GITHUB_SHA 474414115297.dkr.ecr.us-east-1.amazonaws.com/inventariado_harcop:latest 
     - name: Push Docker image
       run: |    
         docker push 474414115297.dkr.ecr.us-east-1.amazonaws.com/inventariado_harcop:latest

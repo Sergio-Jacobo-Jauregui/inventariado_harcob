@@ -19,7 +19,8 @@ jobs:
       run: |
         aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 474414115297.dkr.ecr.us-east-1.amazonaws.com
     - name: Create Docker image
-      run: |    
+      run: |
+        docker info
         docker build -t $GITHUB_REPOSITORY:$$GITHUB_SHA -f docker/Dockerfile ./
         docker tag $GITHUB_REPOSITORY:$$GITHUB_SHA 474414115297.dkr.ecr.us-east-1.amazonaws.com/inventariado_harcop:latest 
     - name: Push Docker image

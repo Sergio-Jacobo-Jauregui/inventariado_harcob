@@ -16,8 +16,10 @@ test:
 deploy:
   stage: deploy
   image: 
-    name: amazon/aws-cli:latest
+    name: ubuntu:latest
     entrypoint: [""]
+  services:
+    -amazon/aws-cli:latest
   id_tokens:
     GITLAB_OIDC_TOKEN:
       aud: https://gitlab.com

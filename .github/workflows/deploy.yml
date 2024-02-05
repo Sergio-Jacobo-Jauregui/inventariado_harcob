@@ -13,8 +13,8 @@ jobs:
         role-to-assume: arn:aws:iam::123456789100:role/my-github-actions-role
         aws-region: us-east-2
     - name: Get Login for Docker
-    run: |
-      aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 474414115297.dkr.ecr.us-east-1.amazonaws.com
-      docker build -t $GITHUB_REPOSITORY:$$GITHUB_SHA -f docker/Dockerfile ./
-      docker tag $GITHUB_REPOSITORY:$$GITHUB_SHA 474414115297.dkr.ecr.us-east-1.amazonaws.com/inventariado_harcop:latest 
-      docker push 474414115297.dkr.ecr.us-east-1.amazonaws.com/inventariado_harcop:latest
+      run: |
+        aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 474414115297.dkr.ecr.us-east-1.amazonaws.com
+        docker build -t $GITHUB_REPOSITORY:$$GITHUB_SHA -f docker/Dockerfile ./
+        docker tag $GITHUB_REPOSITORY:$$GITHUB_SHA 474414115297.dkr.ecr.us-east-1.amazonaws.com/inventariado_harcop:latest 
+        docker push 474414115297.dkr.ecr.us-east-1.amazonaws.com/inventariado_harcop:latest

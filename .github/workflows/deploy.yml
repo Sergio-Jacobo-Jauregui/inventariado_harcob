@@ -1,7 +1,8 @@
 name: Deploy in ECR
+run-name: ${{ github.actor }} is deploying
 on:
   push:
-    branches: [main]
+    branches: [proof_github_actions]
 jobs:
   deploy:
     runs-on: ubuntu-latest

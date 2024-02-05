@@ -23,6 +23,7 @@ jobs:
       run: |
         docker build -t inventariado_harcob:$GITHUB_SHA -f docker/Dockerfile ./
         docker tag inventariado_harcob:$GITHUB_SHA 474414115297.dkr.ecr.us-east-1.amazonaws.com/inventariado_harcop:latest
+        docker tag inventariado_harcob:$GITHUB_SHA 474414115297.dkr.ecr.us-east-1.amazonaws.com/inventariado_harcop:$GITHUB_SHA
     - name: Push Docker image
       run: |    
         docker push 474414115297.dkr.ecr.us-east-1.amazonaws.com/inventariado_harcop:latest

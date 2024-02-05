@@ -13,8 +13,8 @@ jobs:
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::123456789100:role/my-github-actions-role
-        aws-region: us-east-2
+        role-to-assume: arn:aws:iam::474414115297:role/github_connect_ecr
+        aws-region: us-east-1
     - name: Get Login for Docker
       run: |
         aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 474414115297.dkr.ecr.us-east-1.amazonaws.com

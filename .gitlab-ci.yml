@@ -17,7 +17,6 @@ deploy:
   stage: deploy
   image: 
     name: docker:latest
-    entrypoint: [""]
   services:
      - docker:19-dind
   id_tokens:

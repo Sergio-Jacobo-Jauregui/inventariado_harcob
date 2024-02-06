@@ -2,7 +2,7 @@ name: Deploy in ECR
 run-name: ${{ github.actor }} is deploying
 on:
   push:
-    branches: [proof_github_actions]
+    branches: [main]
 permissions:
   id-token: write
   contents: read

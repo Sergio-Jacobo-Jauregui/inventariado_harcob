@@ -1,0 +1,30 @@
+name: Deploy in ECR
+run-name: ${{ github.actor }} is deploying
+on:
+  push:
+    branches: [main]
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::474414115297:role/github_connect_ecr
+        aws-region: us-east-1
+    - name: Get Login for Docker
+      run: |
+        aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 474414115297.dkr.ecr.us-east-1.amazonaws.com
+    - name: Create Docker image
+      run: |
+        docker build -t inventariado_harcob:$GITHUB_SHA -f docker/Dockerfile ./
+        docker tag inventariado_harcob:$GITHUB_SHA 474414115297.dkr.ecr.us-east-1.amazonaws.com/inventariado_harcop:latest
+        docker tag inventariado_harcob:$GITHUB_SHA 474414115297.dkr.ecr.us-east-1.amazonaws.com/inventariado_harcop:$GITHUB_SHA
+    - name: Push Docker image
+      run: |    
+        docker push 474414115297.dkr.ecr.us-east-1.amazonaws.com/inventariado_harcop:latest
+        docker push 474414115297.dkr.ecr.us-east-1.amazonaws.com/inventariado_harcop:$GITHUB_SHA

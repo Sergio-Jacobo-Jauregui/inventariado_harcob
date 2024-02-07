@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.test import TestCase
 from organization.models import Organization
 from work.models import Work
@@ -25,12 +26,13 @@ class PurchaseRecordTest(TestCase):
       self.assertIsNotNone(self.instance.stored_object.id)
       self.assertEqual(isinstance(self.instance.stored_object, StoredObjects), True)
 
-   def test_quantity_only_positive(self):
+   def test_added_quantity_only_positive(self):
       negative_instance = PurchaseRecordFactory.build(
          added_quantity=-1,
          work=self.instance.work,
-         organization=self.instance.work.organization
+         organization=self.instance.work.organization,
+         stored_object=self.instance.stored_object
       )
 
-      with self.assertRaises(ValueError):
+      with self.assertRaises(IntegrityError):
          negative_instance.save()

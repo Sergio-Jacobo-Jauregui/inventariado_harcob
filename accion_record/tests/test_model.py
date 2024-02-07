@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.test import TestCase
 from organization.models import Organization
 from work.models import Work
@@ -7,9 +8,6 @@ from .accion_record_factory import AccionRecordFactory
 from work.tests.work_factory import WorkFactory
 from person.tests.person_factory import PersonFactory
 from stored_objects.tests.stored_objects_factory import StoredObjectsFactory
-import logging
-
-logging.basicConfig(level=logging.WARNING)
 
 class AccionRecordTest(TestCase):
    def setUp(self):
@@ -60,8 +58,10 @@ class AccionRecordTest(TestCase):
       negative_instance = AccionRecordFactory.build(
          quantity=-1,
          work=self.work,
-         organization=self.work.organization
+         organization=self.work.organization,
+         stored_object=self.stored_object,
+         person=self.person
       )
 
-      with self.assertRaises(ValueError):
+      with self.assertRaises(IntegrityError):
          negative_instance.save()

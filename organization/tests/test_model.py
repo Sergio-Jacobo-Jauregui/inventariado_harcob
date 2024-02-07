@@ -5,8 +5,9 @@ from .organization_factory import OrganizationFactory
 class OrganizationTest(TestCase):
    def setUp(self):
       self.instance = OrganizationFactory.create()
+      self.instance.save()
 
-   def test_person_exist(self):
+   def test_organization_exist(self):
       self.assertIsNotNone(self.instance.id)
 
    def test_max_lenght_in_columns(self):

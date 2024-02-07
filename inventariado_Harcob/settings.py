@@ -162,4 +162,4 @@ LOGGING = {
 }
 
 if 'test' in sys.argv:
-    LOGGING['handlers']['console']['level'] = 'ERROR'
+    LOGGING['handlers']['console']['level'] = 'WARNING'

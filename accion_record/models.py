@@ -13,9 +13,9 @@ class AccionRecord(models.Model):
     'return': 'Return'
   }
 
-  type = models.CharField(max_length=50, blank=False, null=True, choices=ACCION_TYPE)
+  type = models.CharField(max_length=8, blank=False, null=True, choices=ACCION_TYPE)
   quantity = models.PositiveIntegerField(blank=False, null=True)
-  quantity_type = models.CharField(max_length=50, blank=False, null=True)
+  quantity_type = models.CharField(max_length=20, blank=False, null=True)
 
   # Timestamps
   created_at = models.DateTimeField(auto_now_add=True)

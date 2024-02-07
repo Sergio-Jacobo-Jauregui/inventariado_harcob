@@ -7,7 +7,10 @@ class PersonFactory(factory.Factory):
     class Meta:
         model = Person
 
+    # Attributes
     first_names = factory.Faker('first_name')
     last_names = factory.Faker('last_name')
     dni = factory.LazyAttribute(lambda _: ''.join( str(random.randint(0,9)) for _ in range(8)))
+
+    # Fks
     organization = factory.SubFactory(OrganizationFactory)

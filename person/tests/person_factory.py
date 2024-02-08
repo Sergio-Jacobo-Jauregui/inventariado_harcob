@@ -1,12 +1,16 @@
 import factory
 from ..models import Person
 from organization.tests.organization_factory import OrganizationFactory
+import random
 
 class PersonFactory(factory.Factory):
     class Meta:
         model = Person
 
+    # Attributes
     first_names = factory.Faker('first_name')
     last_names = factory.Faker('last_name')
-    dni = False
+    dni = factory.LazyAttribute(lambda _: ''.join( str(random.randint(0,9)) for _ in range(8)))
+
+    # Fks
     organization = factory.SubFactory(OrganizationFactory)

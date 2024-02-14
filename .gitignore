@@ -5,3 +5,4 @@ zappa_settings.json
 inventariado_Harcob/context
 db.sqlite3
 extras/
+old_requirements.txt
